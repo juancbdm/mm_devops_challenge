@@ -22,6 +22,3 @@ Se feito pelo script ```startup.sh``` você terá 3 opções, fora a opção ```
 * ```https://nginx-proxy.local/app1```
 * ```curl -kL -H "Host: nginx-proxy.local" localhost:8080/app1``` (redirect insecure connection)
 * ```curl -k https://nginx-proxy.local/app1```
-
-## Referencias
-[Create an SSL certificate](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04#step-1-create-the-ssl-certificate)
