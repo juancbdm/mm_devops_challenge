@@ -1,0 +1,7 @@
+location /app1 {
+  proxy_pass http://app1;
+}
+
+location /app2 {
+  proxy_pass http://app2;
+}

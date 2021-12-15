@@ -1,0 +1,49 @@
+---
+version: '3'
+services:
+  web-proxy:
+    hostname: web-proxy
+    container_name: web-proxy
+    restart: always
+    image: jwilder/nginx-proxy
+    environment:
+      - DEFAULT_HOST=nginx-proxy.local
+    ports:
+      - "8080:80"
+      # - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./configs/vhost.d:/etc/nginx/vhost.d:ro
+      # - ./configs/certs:/etc/nginx/certs
+    networks:
+      - apps
+  app1:
+    hostname: app1
+    container_name: app1
+    restart: always
+    image: nginxdemos/hello
+    environment:
+      - VIRTUAL_HOST=nginx-proxy.local
+      - VIRTUAL_PROTO=http
+      - VIRTUAL_PORT=80
+      # - CERT_NAME=nginx-proxy.local
+    expose:
+      - 80
+    networks:
+      - apps
+  app2:
+    hostname: app2
+    container_name: app2
+    restart: always
+    image: nginxdemos/hello
+    environment:
+      - VIRTUAL_HOST=nginx-proxy.local
+      - VIRTUAL_PROTO=http
+      - VIRTUAL_PORT=80
+      # - CERT_NAME=nginx-proxy.local
+    expose:
+      - 80
+    networks:
+      - apps
+networks:
+  apps:
